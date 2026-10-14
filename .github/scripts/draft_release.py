@@ -2,6 +2,7 @@
 import hashlib
 import json
 import os
+import sys
 from pathlib import Path
 import urllib.request
 import zipfile
@@ -26,16 +27,19 @@ if archive.stat().st_size > 2_000_000:
 checksum = root / 'SHA256SUMS.txt'
 checksum.write_text(hashlib.sha256(archive.read_bytes()).hexdigest() + '  ' + archive.name + '\n', encoding='ascii')
 base = 'https://api.github.com/repos/' + os.environ['GITHUB_REPOSITORY']
-def request(url, payload=None, mime='application/json'):
+def request(url, payload=None, mime='application/json', method=None):
     headers = {'Authorization': 'Bearer ' + os.environ['GH_RELEASE_TOKEN'],
                'Accept': 'application/vnd.github+json', 'Content-Type': mime,
                'X-GitHub-Api-Version': '2022-11-28'}
     data = json.dumps(payload).encode() if isinstance(payload, dict) else payload
-    with urllib.request.urlopen(urllib.request.Request(url, data=data, headers=headers)) as response:
+    with urllib.request.urlopen(urllib.request.Request(url, data=data, headers=headers, method=method)) as response:
         return json.load(response)
 for release in request(base + '/releases'):
     if release['tag_name'] == 'v7.7.0':
-        raise RuntimeError('Release v7.7.0 already exists; refusing to replace it')
+        request(base + '/releases/' + str(release['id']),
+                {'body': (root / 'RELEASE_NOTES.md').read_text()}, method='PATCH')
+        print('Updated release description; existing assets and publication status preserved.')
+        sys.exit(0)
 release = request(base + '/releases', {'tag_name': 'v7.7.0', 'target_commitish': os.environ['GITHUB_SHA'],
     'name': 'Image Fragmentator 7.7.0 Lite', 'body': (root / 'RELEASE_NOTES.md').read_text(),
     'draft': True, 'prerelease': False})
