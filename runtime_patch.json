@@ -1,0 +1,10 @@
+{
+  "package": "ultralytics 8.0.120",
+  "file": "ultralytics/yolo/utils/__init__.py",
+  "date": "2026-09-29",
+  "old": "Path(os.getenv('YOLO_CONFIG_DIR', get_user_config_dir()))",
+  "new": "Path(os.getenv('YOLO_CONFIG_DIR') or get_user_config_dir())",
+  "sha256_before": "12ed3ac7c81dbf5b5a483dc12edd591e91e78a2eec601f63948e5bd86c5224af",
+  "sha256_after": "0051a4039d1e746dfe3cddb012035c0785a76b0a66e77b80c5d2e6482fd33afa",
+  "reason": "Eager default argument creates AppData directory even when YOLO_CONFIG_DIR is set; lazy fallback only."
+}

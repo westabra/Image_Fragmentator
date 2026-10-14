@@ -1,0 +1,7 @@
+{
+  "url": "https://github.com/ultralytics/assets/releases/download/v8.3.0/FastSAM-x.pt",
+  "bytes": 144972346,
+  "sha256": "752cadc2828edb1cd4bc4f9eb587100631af06ea2108f4c9ed56df4755701e76",
+  "provenance": "Ultralytics official assets release v8.3.0; FastSAM-x weights, not a GrainSight-specific fine-tune",
+  "license_policy": "Treat as AGPL-3.0 stack; FastSAM README Apache claim conflicts with repository LICENSE"
+}

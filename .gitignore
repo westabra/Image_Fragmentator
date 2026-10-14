@@ -1,0 +1,12 @@
+R-library/
+runtime/
+weights/
+logs/
+data/
+app/fragmentator_output/
+__pycache__/
+*.pyc
+.matplotlib/
+.ultralytics/
+R_PATH.txt
+.Rhistory

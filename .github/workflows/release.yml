@@ -1,0 +1,22 @@
+name: Build compact release
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch exact source commit
+        run: |
+          git init source
+          git -C source remote add origin "https://github.com/${GITHUB_REPOSITORY}.git"
+          git -C source fetch --depth=1 origin "$GITHUB_SHA"
+          git -C source checkout --detach FETCH_HEAD
+      - name: Verify and prepare draft release
+        working-directory: source
+        env:
+          GH_RELEASE_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/draft_release.py

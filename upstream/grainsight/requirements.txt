@@ -1,0 +1,16 @@
+matplotlib==3.8.4
+opencv-python==4.9.0.80
+Pillow==9.5.0
+PyYAML==6.0.1
+requests==2.31.0
+scipy==1.13.0
+torch==2.2.2
+torchvision==0.17.2
+tqdm==4.66.2
+pandas==2.2.2
+seaborn===0.13.2
+streamlit==1.24.0
+ultralytics==8.0.120
+streamlit-drawable-canvas==0.9.3
+clip==0.2.0
+ultralytics-yolo==0.0.1

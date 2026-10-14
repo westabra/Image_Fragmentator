@@ -1,0 +1,11 @@
+# Headless GrainSight segmentation runtime, Python 3.12.
+# Torch/torchvision installed separately from official CPU wheel index.
+numpy==1.26.4
+Pillow==10.4.0
+matplotlib==3.8.4
+opencv-python==4.9.0.80
+scipy==1.13.0
+pandas==2.2.2
+seaborn==0.13.2
+ultralytics==8.0.120
+setuptools==80.9.0
